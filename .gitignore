@@ -1,0 +1,9 @@
+/eval_imgs/
+/latent_images/
+/plots/
+/data/nyuv2/
+/data/OCID-dataset/
+/data/OCID-dataset.tar.gz
+/models/
+/n_cut_loss.pkl
+/reconstruction_loss.pkl
