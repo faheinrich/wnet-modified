@@ -32,6 +32,9 @@ from data.load_nyuv2 import load_nyuv2_data
 from custom_dataset import DepthDataset
 from datasets import concatenate_datasets
 
+
+
+
 def main():
     print("PyTorch Version: ",torch.__version__)
     if torch.cuda.is_available():
@@ -91,6 +94,9 @@ def main():
         train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size=config.batch_size, num_workers=4,shuffle=True, drop_last=True)
         val_dataloader = torch.utils.data.DataLoader(val_dataset, batch_size=4, num_workers=4, shuffle=False, drop_last=True)
 
+        # rgb_tensor = torch.zeros((len(train_hf), config.inputChannels, config.input_size, config.input_size))
+
+
         ###########################################################################
     else:
         train_dataset = AutoencoderDataset("train", train_xform)
@@ -99,13 +105,17 @@ def main():
         train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size=config.batch_size, num_workers=4, shuffle=True)
         val_dataloader   = torch.utils.data.DataLoader(val_dataset,   batch_size=4, num_workers=4, shuffle=False)
 
+
     util.clear_progress_dir()
 
     ###################################
     #          Model Setup            #
     ###################################
 
+
+
     autoencoder =WNet()#torch.load('./models/2021-04-05_21_07_54_090637') #WNet()#
+
 
     ncutloss_layer = NCutLoss2D()
     if torch.cuda.is_available():
@@ -148,6 +158,7 @@ def main():
         running_loss = 0.0
 
         for i, [inputs, outputs] in tqdm.tqdm(enumerate(train_dataloader, 0), desc=f"Epoch {epoch+1} of {config.num_epochs}", total=len(train_dataloader)):
+
 
             if config.showdata:
                 print(inputs.shape)
@@ -208,7 +219,6 @@ def main():
         #
         # with open('reconstruction_loss.pkl','ab') as fp:
         #   pickle.dump(reconloss, fp)
-
 
 
 

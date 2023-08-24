@@ -4,7 +4,7 @@ import os
 class Config():
     def __init__(self):
         # self.model_name = str(datetime.now())
-        self.model_name = "ocid_rgb"
+        self.model_name = "ocid_all"
 
         self.debug = False
         self.input_size = 32 # Side length of square image patch
@@ -16,21 +16,21 @@ class Config():
         self.use_custom_data = True
         self.use_nyu_data = False # depth in meter originally
         self.use_ocid_data = True # depth in milimeter
-        self.split_ocid_images = True
-        self.training_region_size = self.input_size
-        self.limit_number_samples = 2000
-        self.limit_number_each = 30
+        self.split_ocid_images = False
+        self.training_region_size = 32
+        self.limit_number_samples = 1000
+        self.limit_number_each = 10
 
-        self.inputChannels = 3
-        self.inputChannels = 3
+        self.inputChannels = 7
+        self.inputChannels = 7
         self.use_rgb = True
-        self.use_depth = False
+        self.use_depth = True
         self.normalize_depth = False
-        self.use_normals = False
+        self.use_normals = True
         self.normalize_normals = False
 
         self.k = 64 # Number of classes
-        self.num_epochs = 5 #250 for real
+        self.num_epochs = 50 #250 for real
         self.data_dir = "data/BSDS500val"  # Directory of images
         self.showdata = False # Debug the data augmentation by showing the data we're training on.
 
